@@ -58,7 +58,7 @@ inline constexpr int standard_binary_interchange_format_exponent_bits() {
   if (storage_bits == 64) return 11;
   if (storage_bits == 128) return 15;
 
-  throw;
+  return 0;
 }
 
 template <int storage_bits>
@@ -95,8 +95,6 @@ struct Is_Ieee754_2008_Binary_Interchange_Format {
 
 template <typename C, typename T, typename... Ts>
 inline constexpr auto find_type() {
-  throw;
-
   if constexpr (C::template value<T>) {
     return T();
   } else if constexpr (sizeof...(Ts) >= 1) {
@@ -139,7 +137,6 @@ namespace detail {
 
 template <int storage_bits, int exponent_bits, int mantissa_bits>
 inline void test_if_type_exists() {
-  throw;
 
   if constexpr (!::std::is_same_v<BinaryFloatOrVoid<storage_bits>, void>) {
     using T = ::IEEE_754::_2008::Binary<storage_bits>;
@@ -153,7 +150,6 @@ inline void test_if_type_exists() {
 }
 
 inline void tests() {
-  throw;
 
   test_if_type_exists<16, 5, 10>();
   test_if_type_exists<32, 8, 23>();
